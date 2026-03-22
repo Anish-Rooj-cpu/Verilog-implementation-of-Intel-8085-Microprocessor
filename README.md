@@ -1,12 +1,10 @@
 # Verilog-implementation-of-Intel-8085-Microprocessor
 A Work-in-Progress Verilog Implementation of the Intel 8085 8-bit Microprocessor
-# 8085 Processor Supported Instruction Set
-
-## 1. Architecture
+## Architecture
 The processor follows a modified Von Neumann architecture featuring an 8-bit internal data path and a 16-bit address space. Control logic is implemented via a synchronous Finite State Machine (FSM) that orchestrates data movement between the following subsystems:
 <img width="1536" height="1024" alt="8085_mod_Arch" src="https://github.com/user-attachments/assets/b957f2f6-622e-49c3-b2df-aee79da88b3d" />
-
-## 2. Data Transfer Instructions
+# 8085 Processor Supported Instruction Set
+## 1. Data Transfer Instructions
 These instructions move data between registers or from memory to registers.
 
 | Mnemonic | Opcode (Hex) | Description |
@@ -16,7 +14,7 @@ These instructions move data between registers or from memory to registers.
 | **NOP** | `00` | No Operation. |
 | **HLT** | `76` | Halt the processor. |
 
-## 3. Arithmetic Instructions
+## 2. Arithmetic Instructions
 All arithmetic results (except INR/DCR) are stored in the **Accumulator (A)**.
 
 | Mnemonic | Opcode (Hex) | Description |
@@ -28,7 +26,7 @@ All arithmetic results (except INR/DCR) are stored in the **Accumulator (A)**.
 | **INR r** | `04, 0C, 14, 1C, 24, 2C, 3C` | Increment register `r` by 1. |
 | **DCR r** | `05, 0D, 15, 1D, 25, 2D, 3D` | Decrement register `r` by 1. |
 
-## 4. Logical Instructions
+## 3. Logical Instructions
 Logical operations are performed bitwise against the Accumulator.
 
 | Mnemonic | Opcode (Hex) | Description |
@@ -39,7 +37,7 @@ Logical operations are performed bitwise against the Accumulator.
 | **CMP r** | `B8 - BF` | Compare register `r` with Accumulator (Updates flags only). |
 | **CMA** | `2F`      | Complement Accumulator (1's complement). |
 
-## 5. Control & Branching (Basic Support)
+## 4. Control & Branching (Basic Support)
 *Note: These require the CU to manage multi-cycle PC loads.*
 
 | Mnemonic | Opcode (Hex) | Description |
