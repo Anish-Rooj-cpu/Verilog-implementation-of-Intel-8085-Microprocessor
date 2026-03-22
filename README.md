@@ -2,9 +2,11 @@
 A Work-in-Progress Verilog Implementation of the Intel 8085 8-bit Microprocessor
 # 8085 Processor Supported Instruction Set
 
-This document lists the instructions currently supported by the `cpu_8085` Verilog implementation. Support is defined by successful decoding, ALU routing, and register write-back logic.
+## 1. Architecture
+The processor follows a modified Von Neumann architecture featuring an 8-bit internal data path and a 16-bit address space. Control logic is implemented via a synchronous Finite State Machine (FSM) that orchestrates data movement between the following subsystems:
+<img width="1536" height="1024" alt="8085_mod_Arch" src="https://github.com/user-attachments/assets/b957f2f6-622e-49c3-b2df-aee79da88b3d" />
 
-## 1. Data Transfer Instructions
+## 2. Data Transfer Instructions
 These instructions move data between registers or from memory to registers.
 
 | Mnemonic | Opcode (Hex) | Description |
@@ -14,7 +16,7 @@ These instructions move data between registers or from memory to registers.
 | **NOP** | `00` | No Operation. |
 | **HLT** | `76` | Halt the processor. |
 
-## 2. Arithmetic Instructions
+## 3. Arithmetic Instructions
 All arithmetic results (except INR/DCR) are stored in the **Accumulator (A)**.
 
 | Mnemonic | Opcode (Hex) | Description |
@@ -26,7 +28,7 @@ All arithmetic results (except INR/DCR) are stored in the **Accumulator (A)**.
 | **INR r** | `04, 0C, 14, 1C, 24, 2C, 3C` | Increment register `r` by 1. |
 | **DCR r** | `05, 0D, 15, 1D, 25, 2D, 3D` | Decrement register `r` by 1. |
 
-## 3. Logical Instructions
+## 4. Logical Instructions
 Logical operations are performed bitwise against the Accumulator.
 
 | Mnemonic | Opcode (Hex) | Description |
@@ -37,7 +39,7 @@ Logical operations are performed bitwise against the Accumulator.
 | **CMP r** | `B8 - BF` | Compare register `r` with Accumulator (Updates flags only). |
 | **CMA** | `2F`      | Complement Accumulator (1's complement). |
 
-## 4. Control & Branching (Basic Support)
+## 5. Control & Branching (Basic Support)
 *Note: These require the CU to manage multi-cycle PC loads.*
 
 | Mnemonic | Opcode (Hex) | Description |
